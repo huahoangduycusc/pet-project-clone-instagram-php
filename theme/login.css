@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: 'Poppins',sans-serif;
+}
+
+body {
+  background: #fafafa;
+  width: 100%;
+  font-size: 14px;
+  min-height: 100%;
+}
+
+.text-danger {
+  color: #ff5159;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+a {
+  color: #0095f6;
+  text-decoration: none;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main {
+  width: 100%;
+}
+
+.box {
+  max-width: 350px;
+  text-align: center;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: 27px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 40px;
+  font-family: 'Pacifico', sans-serif;
+  margin: 10px auto 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #3b3b3b;
+}
+
+.list1 {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  margin: 0 0 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.slogan {
+  color: #8e8e8e;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.list1 p {
+  margin: 15px;
+}
+
+.txt-input {
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.txt-input label {
+  position: absolute;
+  font-size: 12px;
+  color: #8e8e8e;
+  height: 36px;
+  line-height: 36px;
+  left: 8px;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+  -webkit-transform-origin: left;
+  transform-origin: left;
+  -webkit-transition: -webkit-transform ease-out .1s;
+  transition: -webkit-transform ease-out .1s;
+  transition: transform ease-out .1s;
+  transition: transform ease-out .1s, -webkit-transform ease-out .1s;
+}
+
+.txt-input input {
+  width: 100%;
+  height: 36px;
+  background: #fafafa;
+  outline: none;
+  border: 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px;
+  padding: 9px 0 7px 8px;
+}
+
+.txt-input.active label {
+  -webkit-transform: scale(0.83333) translateY(-10px);
+  transform: scale(0.83333) translateY(-10px);
+}
+
+.txt-input.active input {
+  font-size: 12px;
+  padding: 14px 0 2px 8px !important;
+}
+
+.txt-button {
+  margin-top: 12px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.txt-button button {
+  width: 100%;
+  background: #0095f6;
+  color: #fff;
+  line-height: 18px;
+  padding: 5px 0;
+  font-weight: 600;
+  border: 0;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease-out;
+  transition: background 0.3s ease-out;
+}
+
+.txt-button button:hover {
+  background: #075a92;
+}
+
+.footer {
+  padding: 0 16px;
+  color: #8e8e8e;
+  min-height: 70px;
+  text-align: center;
+}
+/*# sourceMappingURL=login.css.map */
