@@ -108,5 +108,12 @@ class Account{
         }
     }
 
+    // suggestion random
+    public function getSuggestion(){
+        global $user_id;
+        $sql = "SELECT `account_id`, `username`, `fullname`, `avatar` FROM `$this->table` ORDER by RAND() LIMIT 10";
+        return db_get_list($sql);
+    }
+
 }
 ?>

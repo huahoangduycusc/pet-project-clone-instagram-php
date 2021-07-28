@@ -46,7 +46,7 @@
                     <div class="nav-user-container">
                         <div class="nav-user-item"><a href="<?php echo $homeurl;?>"><i class="fas fa-home"></i></a></div>
                         <div class="nav-user-item"><a href="<?php echo $homeurl;?>/app/explore"><i class="fab fa-cloudscale"></i></a></div>
-                        <div class="nav-user-item"><a href=""><i class="fas fa-heart"></i></a></div>
+                        <div class="nav-user-item"><a href="<?php echo $homeurl;?>/app/profile/saved.php"><i class="fas fa-heart"></i></a></div>
                         <div class="nav-user-item function">
                             <a href="" class="nav-user-item"><i class="fas fa-user dropdown-toggle"></i></a>
                             <div class="guess">

@@ -21,14 +21,14 @@ require_once('libs/header.php');
                     <article class="post-index">
                         <div class="post-index-author">
                             <div class="post-index-avatar">
-                                <a href="<?php echo Account::Url($post['account_id']);?>"><img src="<?php echo $homeurl.$post['avatar'];?>" alt=""></a>
+                                <a href="<?php echo Account::Url($post['account_id']); ?>"><img src="<?php echo $homeurl . $post['avatar']; ?>" alt=""></a>
                             </div>
                             <div class="post-index-name">
-                                <span><a href="<?php echo Account::Url($post['account_id']);?>"><?php echo $post['username']; ?></a></span>
+                                <span><a href="<?php echo Account::Url($post['account_id']); ?>"><?php echo $post['username']; ?></a></span>
                             </div>
                         </div>
                         <div class="post-btn-index">
-                            <button class="post-index-button" data-id="<?php echo $post['post_id']; ?>" data-u="<?php echo $post['account_id'];?>">
+                            <button class="post-index-button" data-id="<?php echo $post['post_id']; ?>" data-u="<?php echo $post['account_id']; ?>">
                                 <i class="fas fa-ellipsis-h"></i>
                             </button>
                         </div>
@@ -50,8 +50,8 @@ require_once('libs/header.php');
                                 <span>
                                     <label for="msg<?php echo $post['post_id']; ?>"><i class="far fa-comment"></i></label>
                                 </span>
-                                <div class="post-count-img" data-saved="<?php echo $post['post_id'];?>">
-                                    <i class="<?php echo ($isSaved ? 'fas fa-bookmark' : 'far fa-bookmark');?>"></i>
+                                <div class="post-count-img" data-saved="<?php echo $post['post_id']; ?>">
+                                    <i class="<?php echo ($isSaved ? 'fas fa-bookmark' : 'far fa-bookmark'); ?>"></i>
                                 </div>
                             </section>
                             <section class="post-index-like">
@@ -59,7 +59,7 @@ require_once('libs/header.php');
                             </section>
                             <section class="post-index-msg" id="chat<?php echo $post['post_id']; ?>">
                                 <div class="post-index-text">
-                                    <span class="post-text-author"><a href="<?php echo Account::Url($post['account_id']);?>"><?php echo $post['username']; ?></a></span>
+                                    <span class="post-text-author"><a href="<?php echo Account::Url($post['account_id']); ?>"><?php echo $post['username']; ?></a></span>
                                     <span class="post-text-content"><?php echo html_entity_decode($post['post_msg']); ?></span>
                                 </div>
                                 <?php
@@ -68,7 +68,7 @@ require_once('libs/header.php');
                                 foreach ($listCmt as $cmt) {
                                 ?>
                                     <div class="post-index-text">
-                                        <span class="post-text-author"><a href="<?php echo Account::Url($cmt['account_id']);?>"><?php echo $cmt['username']; ?></a></span>
+                                        <span class="post-text-author"><a href="<?php echo Account::Url($cmt['account_id']); ?>"><?php echo $cmt['username']; ?></a></span>
                                         <span class="post-text-content"><?php echo html_entity_decode($cmt['cmt_msg']); ?></span>
                                     </div>
                                 <?php
@@ -92,20 +92,20 @@ require_once('libs/header.php');
                 ?>
             </div>
             <div id="loading" class="center hidden">
-                <img src="<?php echo $homeurl;?>/public/images/loading.gif" width="70" alt="">
+                <img src="<?php echo $homeurl; ?>/public/images/loading.gif" width="70" alt="">
             </div>
         </div>
         <div class="welcome-right">
             <div class="box-right-self">
                 <div class="box-right-avatar">
-                    <a href=""><img src="<?php echo $homeurl.$datauser['avatar'];?>" style="width:56px;height:56px;" alt=""></a>
+                    <a href="<?php echo $homeurl; ?>/app/profile"><img src="<?php echo $homeurl . $datauser['avatar']; ?>" style="width:56px;height:56px;" alt=""></a>
                 </div>
                 <div class="box-right-user">
-                    <div class="user-bold"><a href="">online07</a></div>
-                    <div class="user-fullname"><a href="">hoàng duy</a></div>
+                    <div class="user-bold"><a href="<?php echo $homeurl; ?>/app/profile"><?php echo $datauser['username']; ?></a></div>
+                    <div class="user-fullname"><a href="<?php echo $homeurl; ?>/app/profile"><?php echo $datauser['fullname']; ?></a></div>
                 </div>
                 <div class="box-right-out">
-                    <a href="<?php echo $homeurl;?>/signout.php">Log out</a>
+                    <a href="<?php echo $homeurl; ?>/signout.php">Log out</a>
                 </div>
             </div>
             <!-- end div -->
@@ -116,18 +116,28 @@ require_once('libs/header.php');
                 </div>
                 <div class="suggest-list">
                     <div class="suggest-list-user">
-                        <div class="suggest-user">
-                            <div class="suggest-user-avatar">
-                                <a href=""><img src="./images/2.jpg" style="width:32px;height:32px;" alt=""></a>
+                        <?php
+                        $objAccount = new Account();
+                        $getListSugges = $objAccount->getSuggestion();
+                        foreach ($getListSugges as $sg) {
+                        ?>
+                            <div class="suggest-user">
+                                <div class="suggest-user-avatar">
+                                    <a href="<?php echo $homeurl;?>/app/profile/index.php?id=<?php echo $sg['account_id'];?>">
+                                        <img src="<?php echo $homeurl;?>/<?php echo $sg['avatar'];?>" style="width:32px;height:32px;" alt="">
+                                    </a>
+                                </div>
+                                <div class="suggest-user-name">
+                                    <div class="suggest-u"><a href=""><?php echo $sg['username'];?></a></div>
+                                    <div class="suggest-f">Suggested for you</div>
+                                </div>
+                                <div class="suggest-user-follow">
+                                    <a href="">Follow</a>
+                                </div>
                             </div>
-                            <div class="suggest-user-name">
-                                <div class="suggest-u"><a href="">online07</a></div>
-                                <div class="suggest-f">Suggested for you</div>
-                            </div>
-                            <div class="suggest-user-follow">
-                                <a href="">Follow</a>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
