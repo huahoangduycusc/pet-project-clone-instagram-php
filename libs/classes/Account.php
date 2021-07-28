@@ -1,5 +1,6 @@
 <?php
-class Account{
+class Account
+{
     public $table;
     public $table_follow;
     public $account_id = '';
@@ -15,80 +16,88 @@ class Account{
         $this->table_follow = $T_ACCOUNT_FOLLOW;
     }
 
-    public static function Url($id){
+    public static function Url($id)
+    {
         global $homeurl;
-        return $homeurl."/app/profile/index.php?id=$id";
+        return $homeurl . "/app/profile/index.php?id=$id";
     }
 
     // get info of account
-    public function getRow($id){
+    public function getRow($id)
+    {
         $id = Generic::secure($id);
         $sql = "SELECT `account_id`,`username`,`fullname`,`email`,`address`,`phone`,`post`,`verify`,`bio`,`introduce`,`avatar`
         FROM `$this->table` WHERE `account_id` = '{$id}' LIMIT 1";
         return db_get_row($sql);
     }
     // check if user exists
-    public function checkIfExists($username){
+    public function checkIfExists($username)
+    {
         $username = Generic::secure($username);
-        return db_count($this->table,'account_id',array('username' => $username));
+        return db_count($this->table, 'account_id', array('username' => $username));
     }
-    public function checkLogin($username,$password){
+    public function checkLogin($username, $password)
+    {
         $username = Generic::secure($username);
         $password = Generic::secure($password);
         $sql = "SELECT `account_id`,`username`,`password` FROM `$this->table` WHERE `username` = '{$username}' LIMIT 1";
         $row = db_get_row($sql);
-        if(password_verify($password,$row['password']) == false){
+        if (password_verify($password, $row['password']) == false) {
             return false;
         }
         $this->account_id = $row['account_id'];
         return true;
     }
     // count follower of account
-    public function countFollower($id){
+    public function countFollower($id)
+    {
         $filter = array(
             'to_account' => $id
         );
-        return db_count($this->table_follow,'follow_id',$filter);
+        return db_count($this->table_follow, 'follow_id', $filter);
     }
     // count following
-    public function countFollowing($id){
+    public function countFollowing($id)
+    {
         $filter = array(
             'from_account' => $id
         );
-        return db_count($this->table_follow,'follow_id',$filter);
+        return db_count($this->table_follow, 'follow_id', $filter);
     }
     // check if followed ?
-    public function isFollowed($id){
+    public function isFollowed($id)
+    {
         global $user_id;
         $filter = array(
             'from_account' => $user_id,
             'to_account' => $id
         );
-        return db_count($this->table_follow,'follow_id',$filter);
+        return db_count($this->table_follow, 'follow_id', $filter);
     }
     // follow account
-    public function follow($id){
+    public function follow($id)
+    {
         global $user_id;
-        if($this->isFollowed($id) == 1){
+        if ($this->isFollowed($id) == 1) {
             $sql = "DELETE FROM `$this->table_follow` WHERE `from_account` = '{$user_id}' AND `to_account` = '{$id}'";
             db_execute($sql);
             return "Follow";
-        }
-        else{
+        } else {
             $data = array(
                 'from_account' => $user_id,
                 'to_account' => $id
             );
-            db_insert($this->table_follow,$data);
+            db_insert($this->table_follow, $data);
             return "Unfollow";
         }
     }
     // get list followers
-    public function getFollowers($id){
+    public function getFollowers($id)
+    {
         global $start;
         global $limit;
         $account = $this->getRow($id);
-        if($account){
+        if ($account) {
             $sql = "SELECT f.`from_account`, a.`username`, a.`avatar`, a.`fullname`
             FROM `$this->table_follow` f INNER JOIN `$this->table` a ON f.`from_account` = a.`account_id`
             WHERE f.`to_account` = '{$id}' ORDER BY `follow_id` DESC LIMIT $start,$limit";
@@ -96,11 +105,12 @@ class Account{
         }
     }
     // get list following
-    public function getFollowing($id){
+    public function getFollowing($id)
+    {
         global $start;
         global $limit;
         $account = $this->getRow($id);
-        if($account){
+        if ($account) {
             $sql = "SELECT f.`to_account`, a.`username`, a.`avatar`, a.`fullname`
             FROM `$this->table_follow` f INNER JOIN `$this->table` a ON f.`to_account` = a.`account_id`
             WHERE f.`from_account` = '{$id}' ORDER BY `follow_id` DESC LIMIT $start,$limit";
@@ -109,18 +119,33 @@ class Account{
     }
 
     // suggestion random
-    public function getSuggestion(){
+    public function getSuggestion()
+    {
         global $user_id;
         $sql = "SELECT `account_id`, `username`, `fullname`, `avatar` FROM `$this->table` ORDER by RAND() LIMIT 10";
         return db_get_list($sql);
     }
 
     // search for account
-    public function searching($s){
+    public function searching($s)
+    {
         global $user_id;
         $sql = "SELECT `account_id`, `username`, `fullname`, `avatar` FROM `$this->table` WHERE `username` LIKE '%$s%' LIMIT 10";
         return db_get_list($sql);
     }
 
+    // get list account id is following
+    public function getListAccountFollowing()
+    {
+        global $user_id;
+        $sql = "SELECT f.`to_account`, a.`account_id`
+            FROM `$this->table_follow` f INNER JOIN `$this->table` a ON f.`to_account` = a.`account_id`
+            WHERE f.`from_account` = '{$user_id}'";
+        $data = array();
+        $list = db_get_list($sql);
+        foreach($list as $item){
+            $data[] = $item['account_id'];
+        }
+        return $data;
+    }
 }
-?>
