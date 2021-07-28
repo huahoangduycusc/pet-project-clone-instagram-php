@@ -45,7 +45,7 @@ class Post{
         global $limit;
         global $user_id;
         $sql = "SELECT `post_id`, `post_msg`, p.`account_id`, a.`username`, a.`avatar`, `post_date` FROM `$this->table` p
-        INNER JOIN `$this->table_account` a ON p.`account_id` = a.`account_id` ORDER BY p.`post_id` DESC LIMIT $start,$limit";
+        INNER JOIN `$this->table_account` a ON p.`account_id` = a.`account_id` WHERE p.`account_id` = '{$user_id}' ORDER BY p.`post_id` DESC LIMIT $start,$limit";
         return db_get_list($sql);
     }
     // get more post

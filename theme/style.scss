@@ -1320,7 +1320,9 @@ a {
     max-width: 100% !important;
   }
   .welcome-right {
-    display: none;
+    width: 100%;
+    max-width: 100% !important;
+    display: block;
   }
 }
 .likeButton {

@@ -52,12 +52,13 @@ if(isset($_POST['signup'])){
             'verify' => '0',
             'bio' => '',
             'introduce' => '',
+            'avatar' => '/public/profile/default.jpg',
             'role' => 'member',
             'created_at' => date("Y-m-d H:m:s")
         );
         if(db_insert($T_ACCOUNT,$data)){
             $_SESSION['uid'] = db_get_insert_id();
-            redirect($homeurl);
+            redirect($homeurl."/emptyfollow.php");
 
         }
     }
@@ -82,7 +83,7 @@ if(isset($_POST['signup'])){
                         <?php showError($error,'email'); ?>
                         <div class="txt-input">
                             <label>Email</label>
-                            <input type="text" name="email" id="email" type="email" value="<?php oldInput('email');?>">
+                            <input type="email" name="email" id="email" type="email" value="<?php oldInput('email');?>">
                         </div>
                         <?php showError($error,'fullname'); ?>
                         <div class="txt-input">

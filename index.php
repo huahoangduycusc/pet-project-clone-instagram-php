@@ -14,6 +14,9 @@ require_once('libs/header.php');
                 <?php
                 $objPost = new Post();
                 $listPost = $objPost->getAllPostofAccountFollowed();
+                if (count($listPost) == 0) {
+                    echo '<div class="empty">Follow more friend to see their activities</div>';
+                }
                 foreach ($listPost as $post) {
                     $isLiked = $objPost->isLiked($post['post_id']);
                     $isSaved = $objPost->isSaved($post['post_id']);
@@ -120,19 +123,20 @@ require_once('libs/header.php');
                         $objAccount = new Account();
                         $getListSugges = $objAccount->getSuggestion();
                         foreach ($getListSugges as $sg) {
+                            $textFollow = $objAccount->isFollowed($sg['account_id']) ? 'Unfollow' : 'Follow';
                         ?>
                             <div class="suggest-user">
                                 <div class="suggest-user-avatar">
-                                    <a href="<?php echo $homeurl;?>/app/profile/index.php?id=<?php echo $sg['account_id'];?>">
-                                        <img src="<?php echo $homeurl;?>/<?php echo $sg['avatar'];?>" style="width:32px;height:32px;" alt="">
+                                    <a href="<?php echo $homeurl; ?>/app/profile/index.php?id=<?php echo $sg['account_id']; ?>">
+                                        <img src="<?php echo $homeurl; ?>/<?php echo $sg['avatar']; ?>" style="width:32px;height:32px;" alt="">
                                     </a>
                                 </div>
                                 <div class="suggest-user-name">
-                                    <div class="suggest-u"><a href=""><?php echo $sg['username'];?></a></div>
+                                    <div class="suggest-u"><a href="<?php echo $homeurl; ?>/app/profile/index.php?id=<?php echo $sg['account_id']; ?>"><?php echo $sg['username']; ?></a></div>
                                     <div class="suggest-f">Suggested for you</div>
                                 </div>
                                 <div class="suggest-user-follow">
-                                    <a href="">Follow</a>
+                                    <a href="" class="follow-request" data-u="<?php echo $sg['account_id']; ?>"><?php echo $textFollow;?></a>
                                 </div>
                             </div>
                         <?php

@@ -35,7 +35,7 @@
                     <a href="<?php echo $homeurl; ?>"><img src="<?php echo $homeurl; ?>/images/logo.png" alt=""></a>
                 </div>
                 <div class="nav-search">
-                    <form class="nav-search-form">
+                    <form class="nav-search-form" action="<?php echo $homeurl;?>/search.php" method="get" autocomplete="off">
                         <div class="search-nav-content">
                             <input type="text" name="s" placeholder="Search">
                             <button type="submit" class="nav-search-btn"><i class="fas fa-search"></i></button>

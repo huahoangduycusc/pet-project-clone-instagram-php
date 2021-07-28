@@ -115,5 +115,12 @@ class Account{
         return db_get_list($sql);
     }
 
+    // search for account
+    public function searching($s){
+        global $user_id;
+        $sql = "SELECT `account_id`, `username`, `fullname`, `avatar` FROM `$this->table` WHERE `username` LIKE '%$s%' LIMIT 10";
+        return db_get_list($sql);
+    }
+
 }
 ?>
